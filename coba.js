@@ -25,9 +25,7 @@ function buatInputPilihan(button) {
         inputGroup.appendChild(label);
         inputGroup.appendChild(input);
         container.appendChild(inputGroup);
-        
     }
-    
 
     let existingButton = document.getElementById('ok-button');
     if (!existingButton) {
@@ -37,6 +35,9 @@ function buatInputPilihan(button) {
         button.onclick = function() {
             try {
                 tampilkanPilihan();
+                button.disabled = true; // Disable button after click
+                let inputs = document.querySelectorAll('#pilihan-container input');
+                inputs.forEach(input => input.disabled = true); // Disable all inputs
             } catch (error) {
                 alert(error.message);
             }
@@ -44,7 +45,6 @@ function buatInputPilihan(button) {
         container.appendChild(button);
     }
     button.disabled = true;
-    input.disabled = true;
 }
 
 function tampilkanPilihan() {
@@ -62,7 +62,7 @@ function tampilkanPilihan() {
             return;
         }
         pilihanArray.push(pilihan);
-       
+
         let option = document.createElement('option');
         option.value = pilihan;
         option.innerText = pilihan;
