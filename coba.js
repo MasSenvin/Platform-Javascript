@@ -1,4 +1,5 @@
-function buatInputPilihan() {
+function buatInputPilihan(button) {
+    document.getElementById("nama").disabled = true;
     let jumlah = parseInt(document.getElementById('jumlah').value);
     let container = document.getElementById('pilihan-container');
     container.innerHTML = '';
@@ -7,6 +8,7 @@ function buatInputPilihan() {
         alert("Masukkan jumlah pilihan yang valid (minimal 1).");
         return;
     }
+    document.getElementById("jumlah").disabled = true;
 
     for (let i = 1; i <= jumlah; i++) {
         let inputGroup = document.createElement('div');
@@ -23,7 +25,9 @@ function buatInputPilihan() {
         inputGroup.appendChild(label);
         inputGroup.appendChild(input);
         container.appendChild(inputGroup);
+        
     }
+    
 
     let existingButton = document.getElementById('ok-button');
     if (!existingButton) {
@@ -33,13 +37,14 @@ function buatInputPilihan() {
         button.onclick = function() {
             try {
                 tampilkanPilihan();
-                button.disabled = true;
             } catch (error) {
                 alert(error.message);
             }
         };
         container.appendChild(button);
     }
+    button.disabled = true;
+    input.disabled = true;
 }
 
 function tampilkanPilihan() {
@@ -57,7 +62,7 @@ function tampilkanPilihan() {
             return;
         }
         pilihanArray.push(pilihan);
-
+       
         let option = document.createElement('option');
         option.value = pilihan;
         option.innerText = pilihan;
